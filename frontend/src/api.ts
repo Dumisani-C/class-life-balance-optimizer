@@ -1,9 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api', // Adjust if your backend is different
-});
-
-export default api;
-
-
+export const getGeneratedPlan = async () => {
+  const response = await axios.post("http://127.0.0.1:8000/api/generate-plan/", {});
+  return response.data;
+};

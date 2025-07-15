@@ -7,3 +7,5 @@ router.register('activities', ActivityViewSet)
 router.register('plans', GeneratedPlanViewSet)
 
 urlpatterns = router.urls
+
+

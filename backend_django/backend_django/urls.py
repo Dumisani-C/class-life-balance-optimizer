@@ -14,10 +14,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
+from conversation.views import dummy_plan
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from conversation.views import (
+    StudentPreferencesViewSet,
+    ActivityViewSet,
+    GeneratedPlanViewSet,
+    GeneratePlanView,
+)
+
+# Register viewsets with DRF router
+router = DefaultRouter()
+router.register(r'preferences', StudentPreferencesViewSet)
+router.register(r'activities', ActivityViewSet)
+router.register(r'plans', GeneratedPlanViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('conversation.optimizer_urls')),
+    path('api/', include(router.urls)),
+    path('api/generate-plan/', GeneratePlanView.as_view(), name='generate-plan'),
+    path('api/test-dummy/', dummy_plan, name='test-dummy'),
 ]
+    
+
+

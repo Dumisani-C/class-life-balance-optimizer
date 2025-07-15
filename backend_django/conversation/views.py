@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from django.contrib.auth.models import User
 
+
+
 from .models import StudentPreferences, Activity, GeneratedPlan
 from .serializers import (
     StudentPreferencesSerializer,
@@ -16,7 +18,10 @@ class GeneratePlanView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-        user = request.user
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        user = User.objects.first()  # just grab first user for testing
+
 
         # Get user preferences
         try:
@@ -57,3 +62,4 @@ class ActivityViewSet(viewsets.ModelViewSet):
 class GeneratedPlanViewSet(viewsets.ModelViewSet):
     queryset = GeneratedPlan.objects.all()
     serializer_class = GeneratedPlanSerializer
+
