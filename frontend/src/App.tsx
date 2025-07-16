@@ -2,6 +2,7 @@ import React from "react";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
+import AnalyticsDashboard from "./components/AnalyticsDashboard";
 import { FeaturesSection } from "./components/FeaturesSection";
 import { SmartSchedulerForm } from "./components/SmartSchedulerForm"; // 👈 Add this
 
@@ -12,6 +13,7 @@ function App() {
       <HeroSection />
       <FeaturesSection />
       <SmartSchedulerForm />
+      <AnalyticsDashboard />
       <FeaturesSection />
       <Footer />
     </main>
