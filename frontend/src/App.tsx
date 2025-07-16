@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { FeaturesSection } from "./components/FeaturesSection";
@@ -10,9 +11,12 @@ function App() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
-      <SmartSchedulerForm /> 
+      <SmartSchedulerForm />
+      <FeaturesSection />
+      <Footer />
     </main>
   );
 }
+
 
 export default App;
