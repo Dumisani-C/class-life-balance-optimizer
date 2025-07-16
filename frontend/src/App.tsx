@@ -8,51 +8,50 @@ interface Plan {
 
 const App = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchPlan = async () => {
+    setLoading(true);
+    try {
+      const data = await getGeneratedPlan();
+      console.log("✅ Suggestion:", data.suggestion);
+
+      const suggestion: string = data.suggestion;
+
+      if (!suggestion || suggestion.trim() === "") {
+        console.warn("⚠️ Empty suggestion received.");
+        return;
+      }
+
+      const parsedPlan: Plan[] = suggestion
+        .split("\n")
+        .filter(line => line.includes(":"))
+        .map(line => {
+          const [day, tasksStr] = line.split(":");
+          const tasks = tasksStr
+            ? tasksStr.split(",").map(task => task.trim())
+            : [];
+          return { day: day.trim(), tasks };
+        });
+
+      setPlans(parsedPlan);
+    } catch (err) {
+      console.error("❌ Failed to fetch:", err);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchPlan = async () => {
-      try {
-        const data = await getGeneratedPlan();
-        console.log("✅ Suggestion:", data.suggestion);
-
-        const suggestion: string = data.suggestion;
-
-        if (!suggestion || suggestion.trim() === "") {
-          console.warn("⚠️ Empty suggestion received.");
-          return;
-        }
-
-        const parsedPlan: Plan[] = suggestion
-          .split("\n")
-          .filter(line => line.includes(":"))
-          .map(line => {
-            const [day, tasksStr] = line.split(":");
-            const tasks = tasksStr
-              ? tasksStr.split(",").map(task => task.trim())
-              : [];
-            return { day: day.trim(), tasks };
-          });
-
-        if (isMounted) {
-          setPlans(parsedPlan);
-        }
-      } catch (err) {
-        console.error("❌ Failed to fetch:", err);
-      }
-    };
-
     fetchPlan();
-
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   return (
     <div>
       <h1>Generated Plans</h1>
+      <button onClick={fetchPlan} disabled={loading}>
+        {loading ? "Refreshing..." : "🔁 Refresh Plan"}
+      </button>
+
       {plans.length === 0 ? (
         <p>Loading...</p>
       ) : (
