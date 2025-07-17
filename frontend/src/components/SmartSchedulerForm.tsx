@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export function SmartSchedulerForm() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,6 @@ export function SmartSchedulerForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, simulate result
     setResult(`Your schedule includes:
 • Classes: ${formData.classes}
 • Work: ${formData.work}
@@ -25,7 +25,13 @@ export function SmartSchedulerForm() {
   };
 
   return (
-    <section className="py-16 px-4 text-white max-w-2xl mx-auto">
+    <motion.section
+      className="py-16 px-4 text-white max-w-2xl mx-auto"
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
       <h2 className="text-3xl font-bold mb-6 text-center">🎯 Smart Scheduler</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -76,6 +82,6 @@ export function SmartSchedulerForm() {
           <pre>{result}</pre>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
