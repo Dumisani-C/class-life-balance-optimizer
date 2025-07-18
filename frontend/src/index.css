@@ -25,3 +25,18 @@
   z-index: -1;
   pointer-events: none;
 }
+
+/* ✨ Additional Floating Stars Layer */
+.animate-stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 0.5px, transparent 0.5px),
+    radial-gradient(white 0.5px, transparent 0.5px);
+  background-size: 100px 100px, 200px 200px;
+  background-position: 50px 50px, 0 0;
+  animation: starfield 160s linear infinite;
+  opacity: 0.1;
+  z-index: -1;
+}
