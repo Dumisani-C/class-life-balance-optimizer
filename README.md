@@ -1,4 +1,4 @@
-# Class-Life Balance Optimizer (🚧 Work in Progress)
+# Class-Life Balance Optimizer (Work in Progress)
 
 A full-stack project to help **college students balance classes, jobs, and wellness** by predicting burnout risk and generating smarter weekly schedules.  
 This project integrates **Google’s Gemini API** for AI-powered insights and schedule recommendations.
@@ -6,13 +6,13 @@ This project integrates **Google’s Gemini API** for AI-powered insights and sc
 ---
 
 ## Status
-⚠This project is **under active development**.  
+This project is **under active development**.  
 Current focus: setting up the backend API + Gemini integration.
 
 ---
 
 ## Planned Features
-- Burnout risk prediction (ML models with scikit-learn/TensorFlow)  
+- Burnout risk prediction 
 - **AI-powered schedule suggestions** (Gemini API)  
 - Dashboard for tracking sleep debt, workload, and wellness trends  
 - Export options (PDF/CSV)  
